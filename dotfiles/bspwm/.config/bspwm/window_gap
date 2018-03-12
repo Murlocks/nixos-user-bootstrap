@@ -1,0 +1,65 @@
+#!/bin/sh
+
+. ~/.config/lemonbar/panel_config
+
+# mode='linear 20'
+mode='binary'
+
+linear() {
+    factor=$(resolution $@)
+    echo $(( ($margin + $factor) - ($windows - 1) * $factor ))
+}
+
+binary() {
+    [[ $windows -lt 0 ]] && windows=1
+    echo $(( ($margin * 2) / (2 ** ($windows - 1)) ))
+}
+
+dotpitch() {
+    echo $@ | awk '{ print int($1 * 0.25 / 0.282 + 0.5) }'
+}
+
+resolution() {
+    width=$(bspc query -T | grep -oE "[1-9].*[^-] \*" | sed -n 's/[0-9] \([0-9][0-9]*\)x.*/\1/p')
+    height=$(bspc query -T | grep -oE "[1-9].*[^-] \*" | sed -n 's/[0-9] .*x\([0-9][0-9]*\).*/\1/p')
+    echo "$1 * $height / $width" | bc
+}
+
+p_offset() {
+    [ -n "$(xdotool search --name --onlyvisible bar)" ] && \
+            echo "$PANEL_HEIGHT" || \
+            echo 0
+}
+
+window_gap() {
+    margin=$(desktop_margin)
+    M=$(bspc query --monitors --desktop focused)
+    margin=$(resolution $margin)
+    windows=$(bspc query --desktop focused --windows | wc -l)
+    G=$($mode)
+    [[ $G -lt 0 || ! -f ~/.config/bspwm/!window_gap ]] && G=0
+    if bspc query --tree --monitor $M | grep -q ' T - \*'; then
+        bspc config --desktop focused window_gap $G
+        P=$(( $margin - $G ))
+        [[ $P -lt 0 ]] && P=0
+    else
+        P=$(desktop_margin)
+    fi
+    P=$(resolution $P)
+    bspc config -m $M top_padding $(expr $P + $(p_offset))
+    bspc config -m $M left_padding $P
+    bspc config -m $M bottom_padding $P
+    bspc config -m $M right_padding $P
+}
+
+case $@ in
+    --daemon)
+        bspc control --subscribe | while read line
+        do
+            window_gap
+        done
+        ;;
+     *)
+        window_gap
+        ;;
+esac

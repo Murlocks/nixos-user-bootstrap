@@ -1,0 +1,9 @@
+#!/bin/sh
+
+clear() {
+    [[ -f /tmp/WindowL ]] && rm -f /tmp/WindowL || touch /tmp/WindowL
+    [[ -f /tmp/WindowR ]] && rm -f /tmp/WindowR || touch /tmp/WindowR
+}
+
+dir=$@
+w=

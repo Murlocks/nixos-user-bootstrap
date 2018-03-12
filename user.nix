@@ -180,7 +180,7 @@
   in {
 
     extraUsers.murlocks = {
-      initialPassword = "password1"
+      initialPassword = "password1";
       isNormalUser = true;
       uid = 1337;
       description = "Rene Tianco";
@@ -191,6 +191,6 @@
       ];
     };
 
-  }
+  };
 
 }
