@@ -174,6 +174,7 @@
 
   users = let
 
+    # fix paths
     immutableDotfiles =  map (p: "${../../../dotfiles}/${p}");
     mutableDotfiles = u: map (p: "${u.home}/.dotfiles/dotfiles/${p}");
 
@@ -185,7 +186,7 @@
       uid = 1337;
       description = "Rene Tianco";
       extraGroups = [ "wheel" ];
-      dotfiles = immutableDotfiles [ "bspwm" ];
+      dotfiles.profiles = [ "bspwm" ];
       packages = with pkgs; [
         # Per user packages
       ];
