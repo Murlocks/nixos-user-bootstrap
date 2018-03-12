@@ -35,7 +35,7 @@
 
     xserver = {
       enable = true;
-      layout = lib.mkDefault "en";
+      layout = lib.mkDefault "us";
       xkbOptions = "caps:hyper,numpad:microsoft";
       synaptics = {
         enable = lib.mkDefault true;
