@@ -119,6 +119,10 @@
     '';
   };
 
+  users.users.root = {
+    initialPassword = "password1";
+  };
+
   # Stability!
   system.autoUpgrade.enable = lib.mkDefault false;
 }

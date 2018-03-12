@@ -35,13 +35,27 @@
 
     xserver = {
       enable = true;
-      layout = lib.mkDefault "pl";
+      layout = lib.mkDefault "en";
+      xkbOptions = "caps:hyper,numpad:microsoft";
       synaptics = {
         enable = lib.mkDefault true;
         twoFingerScroll = true;
         tapButtons = true;
         fingersMap = [1 3 2];
       };
+
+      displayManager.lightdm = {
+        enable = true;
+        greeters.gtk = {
+          theme.package = pkgs.breeze-gtk;
+          theme.name = "Breeze";
+          # No way to choose hicolor as a fallback. ⇒ https://github.com/NixOS/nixpkgs/issues/30694
+          #iconTheme.package = pkgs.breeze-icons;
+          #iconTheme.name = "breeze";
+        };
+      };
+      desktopManager.xterm.enable = false;
+      windowManager.bspwm.enable = true;
     };
   };
 
@@ -85,8 +99,6 @@
     libnotify
     man_db
     manpages
-    michalrus.git-annex
-    michalrus.git-annex-desktop
     mpv
     nix-prefetch-scripts
     nixos-unstable.awf
