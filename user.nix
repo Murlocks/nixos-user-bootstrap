@@ -167,16 +167,15 @@
 
   in {
 
-    extraUsers.mw = {
-      hashedPassword = "$6$EDtlcw2d9XVBOw$Y0SLSpFnAc/tc3z8/Y4cQK/p.Vuqkwz0HHBkYcDAlUI3lHOFJQBj0cscE30qs2YoxsoUwOxIno0g4zhZUsZ7R1";
+    extraUsers.murlocks = {
+      initialPassword = "password1"
       isNormalUser = true;
       uid = 1337;
-      description = "Michal Rus (work)";
-      extraGroups = [ "nonet" "scanner" "networkmanager" "vboxusers" "wireshark" "cdrom" ];
-      dotfiles = immutableDotfiles [ "base" "michalrus/base" "michalrus/desktop" "michalrus/work/di" "bspwm" "emacs" ];
+      description = "Rene Tianco";
+      extraGroups = [ "wheel" ];
+      dotfiles = immutableDotfiles [ "bspwm" ];
       packages = with pkgs; [
-        openjdk8   # for nofatty
-        pgadmin
+        # Per user packages
       ];
     };
 
