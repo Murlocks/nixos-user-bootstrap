@@ -83,8 +83,8 @@
     ncdu
     netcat-openbsd
     nix-repl
-    nixos-unstable.arping
-    nixos-unstable.preventGC
+    # nixos-unstable.arping
+    # nixos-unstable.preventGC
     nmap
     openssl
     p7zip

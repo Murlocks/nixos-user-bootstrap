@@ -101,12 +101,12 @@
     manpages
     mpv
     nix-prefetch-scripts
-    nixos-unstable.awf
-    nixos-unstable.catdocx
-    nixos-unstable.devede
-    nixos-unstable.octave
-    nixos-unstable.xpad
-    nixos-unstable.youtube-dl
+    # nixos-unstable.awf
+    # nixos-unstable.catdocx
+    # nixos-unstable.devede
+    # nixos-unstable.octave
+    # nixos-unstable.xpad
+    # nixos-unstable.youtube-dl
     normalize
     ntfs3g
     oathToolkit
@@ -137,7 +137,7 @@
     timidity
     transmission_gtk
     unclutter
-    unfree.nixos-unstable.geekbench
+    # unfree.nixos-unstable.geekbench
     utox
     winetricks
     wmctrl
