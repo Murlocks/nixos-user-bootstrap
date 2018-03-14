@@ -13,9 +13,5 @@
 
   security.rngd.enable = false;
 
-  time.timeZone = "US/East";
-
   services.vmwareGuest.enable = true;
-
-  system.stateVersion = "17.09";
 }

@@ -31,6 +31,23 @@
     };
   };
 
+  time.timeZone = "US/East";
+
+  security = {
+    pam.services.su.requireWheel = true;
+
+    hideProcessInformation = true;
+
+    sudo.extraConfig = ''
+      Defaults timestamp_timeout=0
+      %wheel ALL=(root) NOPASSWD: ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch -k
+      %wheel ALL=(root) NOPASSWD: ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch -k --upgrade
+      %wheel ALL=(root) NOPASSWD: ${config.system.build.nixos-rebuild}/bin/nixos-rebuild boot -k
+      %wheel ALL=(root) NOPASSWD: ${config.system.build.nixos-rebuild}/bin/nixos-rebuild boot -k --upgrade
+      %wheel ALL=(root) NOPASSWD: ${config.nix.package.out}/bin/nix-collect-garbage -d
+    '';
+  };
+
   services = {
     xserver = {
       enable = true;
@@ -61,32 +78,12 @@
     '';
   };
 
-  security = {
-    pam.services.su.requireWheel = true;
-
-    hideProcessInformation = true;
-
-    sudo.extraConfig = ''
-      Defaults timestamp_timeout=0
-      %wheel ALL=(root) NOPASSWD: ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch -k
-      %wheel ALL=(root) NOPASSWD: ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch -k --upgrade
-      %wheel ALL=(root) NOPASSWD: ${config.system.build.nixos-rebuild}/bin/nixos-rebuild boot -k
-      %wheel ALL=(root) NOPASSWD: ${config.system.build.nixos-rebuild}/bin/nixos-rebuild boot -k --upgrade
-      %wheel ALL=(root) NOPASSWD: ${config.nix.package.out}/bin/nix-collect-garbage -d
-    '';
-  };
-
   programs = {
     zsh = {
       enable = true;
       enableCompletion = true;
     };
     bash.enableCompletion = true;
-  };
-
-  users = {
-    mutableUsers = lib.mkDefault false;
-    defaultUserShell = "/run/current-system/sw/bin/zsh";
   };
 
   environment.variables.PATH = [ "$HOME/.bin" ];
@@ -156,6 +153,9 @@
 
   in {
     users = {
+
+      mutableUsers = lib.mkDefault false;
+      defaultUserShell = "/run/current-system/sw/bin/zsh";
 
       root = {
         initialPassword = "password1";
