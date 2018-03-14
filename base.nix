@@ -152,10 +152,11 @@
     mutableDotfiles = u: map (p: "${u.home}/.dotfiles/dotfiles/${p}");
 
   in {
-    users = {
 
-      mutableUsers = lib.mkDefault false;
-      defaultUserShell = "/run/current-system/sw/bin/zsh";
+    mutableUsers = lib.mkDefault false;
+    defaultUserShell = "/run/current-system/sw/bin/zsh";
+
+    users = {
 
       root = {
         initialPassword = "password1";
