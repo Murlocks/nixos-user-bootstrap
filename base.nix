@@ -54,7 +54,7 @@
       layout = lib.mkDefault "us";
       xkbOptions = "caps:hyper,numpad:microsoft";
 
-      desktopManager.xterm.enable = false;
+      displayManager.lightdm.enable = true;
       windowManager.bspwm.enable = true;
     };
 
