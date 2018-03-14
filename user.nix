@@ -3,7 +3,7 @@
 {
   imports = [
     ./modules
-    ./common.nix
+    ./base.nix
   ];
 
   nix = {
@@ -112,6 +112,7 @@
     rfkill
     ripgrep
     rtmpdump
+    rxvt_unicode
     samba
     scantailor
     shared_mime_info

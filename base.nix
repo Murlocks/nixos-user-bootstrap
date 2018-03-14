@@ -27,16 +27,6 @@
       layout = lib.mkDefault "us";
       xkbOptions = "caps:hyper,numpad:microsoft";
 
-      # displayManager.lightdm = {
-      #   enable = true;
-      #   greeters.gtk = {
-      #     theme.package = pkgs.breeze-gtk;
-      #     theme.name = "Breeze";
-      #     # No way to choose hicolor as a fallback. ⇒ https://github.com/NixOS/nixpkgs/issues/30694
-      #     # iconTheme.package = pkgs.breeze-icons;
-      #     # iconTheme.name = "breeze";
-      #   };
-      # };
       desktopManager.xterm.enable = false;
       windowManager.bspwm.enable = true;
     };
@@ -77,6 +67,8 @@
   environment.variables.PATH = [ "$HOME/.bin" ];
 
   environment.systemPackages = with pkgs; [
+    # nixos-unstable.arping
+    # nixos-unstable.preventGC
     bc
     bindfs
     calc
@@ -108,8 +100,6 @@
     ncdu
     netcat-openbsd
     nix-repl
-    nixos-unstable.arping
-    nixos-unstable.preventGC
     nmap
     openssl
     p7zip
@@ -124,6 +114,7 @@
     tcpdump
     unzip
     usbutils
+    vim
     wget
     which
     wirelesstools
