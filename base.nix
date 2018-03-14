@@ -21,6 +21,16 @@
     };
   };
 
+  powerManagement.cpuFreqGovernor = lib.mkOverride 999 "performance";
+
+  hardware = {
+    opengl.driSupport32Bit = true; # for Wine
+    pulseaudio = {
+      enable = true;
+      support32Bit = true; # for Wine
+    };
+  };
+
   services = {
     xserver = {
       enable = true;
@@ -48,6 +58,21 @@
 
     journald.extraConfig = ''
       SystemMaxUse=200M
+    '';
+  };
+
+  security = {
+    pam.services.su.requireWheel = true;
+
+    hideProcessInformation = true;
+
+    sudo.extraConfig = ''
+      Defaults timestamp_timeout=0
+      %wheel ALL=(root) NOPASSWD: ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch -k
+      %wheel ALL=(root) NOPASSWD: ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch -k --upgrade
+      %wheel ALL=(root) NOPASSWD: ${config.system.build.nixos-rebuild}/bin/nixos-rebuild boot -k
+      %wheel ALL=(root) NOPASSWD: ${config.system.build.nixos-rebuild}/bin/nixos-rebuild boot -k --upgrade
+      %wheel ALL=(root) NOPASSWD: ${config.nix.package.out}/bin/nix-collect-garbage -d
     '';
   };
 
@@ -105,9 +130,11 @@
     p7zip
     pciutils
     pv
+    rxvt_unicode
     smartmontools
     socat
     sqlite-interactive
+    st
     st
     strace
     stress-ng
@@ -121,23 +148,41 @@
     zip
   ];
 
-  security = {
-    pam.services.su.requireWheel = true;
+  users = let
 
-    hideProcessInformation = true;
+    # fix paths
+    immutableDotfiles =  map (p: "${../../../dotfiles}/${p}");
+    mutableDotfiles = u: map (p: "${u.home}/.dotfiles/dotfiles/${p}");
 
-    sudo.extraConfig = ''
-      Defaults timestamp_timeout=0
-      %wheel ALL=(root) NOPASSWD: ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch -k
-      %wheel ALL=(root) NOPASSWD: ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch -k --upgrade
-      %wheel ALL=(root) NOPASSWD: ${config.system.build.nixos-rebuild}/bin/nixos-rebuild boot -k
-      %wheel ALL=(root) NOPASSWD: ${config.system.build.nixos-rebuild}/bin/nixos-rebuild boot -k --upgrade
-      %wheel ALL=(root) NOPASSWD: ${config.nix.package.out}/bin/nix-collect-garbage -d
-    '';
+  in {
+    users = {
+
+      root = {
+        initialPassword = "password1";
+        dotfiles.profiles = [ "bspwm" ];
+      };
+
+      extraUsers.murlocks = {
+        initialPassword = "password1";
+        isNormalUser = true;
+        uid = 1337;
+        description = "Rene Tianco";
+        extraGroups = [ "wheel" ];
+        dotfiles.profiles = [ "bspwm" ];
+      };
+
+    };
   };
 
-  users.users.root = {
-    initialPassword = "password1";
+  fonts = {
+    enableGhostscriptFonts = true;
+    fonts = with pkgs; [
+      terminus_font
+      unifont
+      unifont_upper
+      gohufont
+      font-awesome-ttf
+    ];
   };
 
   # Stability!
