@@ -168,7 +168,7 @@
         uid = 1337;
         description = "Rene Tianco";
         extraGroups = [ "wheel" ];
-        dotfiles.profiles = [ "bspwm" ];
+        dotfiles.profiles = [ "bspwm" "nixpkgs" ];
       };
 
     };
