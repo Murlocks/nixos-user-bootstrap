@@ -21,15 +21,32 @@
     };
   };
 
-  programs = {
-    zsh = {
-      enable = true;
-      enableCompletion = true;
-    };
-    bash.enableCompletion = true;
-  };
-
   services = {
+    xserver = {
+      enable = true;
+      layout = lib.mkDefault "us";
+      xkbOptions = "caps:hyper,numpad:microsoft";
+
+      # displayManager.lightdm = {
+      #   enable = true;
+      #   greeters.gtk = {
+      #     theme.package = pkgs.breeze-gtk;
+      #     theme.name = "Breeze";
+      #     # No way to choose hicolor as a fallback. ⇒ https://github.com/NixOS/nixpkgs/issues/30694
+      #     # iconTheme.package = pkgs.breeze-icons;
+      #     # iconTheme.name = "breeze";
+      #   };
+      # };
+      desktopManager.xterm.enable = false;
+      windowManager.bspwm.enable = true;
+    };
+
+    openssh = {
+      enable = true;
+      passwordAuthentication = false;
+      challengeResponseAuthentication = false;
+    };
+
     haveged.enable = true;
 
     smartd.enable = lib.mkDefault true;
@@ -42,6 +59,14 @@
     journald.extraConfig = ''
       SystemMaxUse=200M
     '';
+  };
+
+  programs = {
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+    };
+    bash.enableCompletion = true;
   };
 
   users = {
@@ -83,8 +108,8 @@
     ncdu
     netcat-openbsd
     nix-repl
-    # nixos-unstable.arping
-    # nixos-unstable.preventGC
+    nixos-unstable.arping
+    nixos-unstable.preventGC
     nmap
     openssl
     p7zip
@@ -93,6 +118,7 @@
     smartmontools
     socat
     sqlite-interactive
+    st
     strace
     stress-ng
     tcpdump

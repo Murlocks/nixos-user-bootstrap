@@ -2,6 +2,6 @@
   imports = [
     ./user-profiles.nix
     ./dotfiles.nix
-    ./malicious-hosts.nix
+    # ./malicious-hosts.nix
   ];
 }
