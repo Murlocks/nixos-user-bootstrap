@@ -132,7 +132,6 @@
     socat
     sqlite-interactive
     st
-    st
     strace
     stress-ng
     tcpdump
@@ -163,7 +162,7 @@
         dotfiles.profiles = [ "bspwm" ];
       };
 
-      extraUsers.murlocks = {
+      murlocks = {
         initialPassword = "password1";
         isNormalUser = true;
         uid = 1337;
