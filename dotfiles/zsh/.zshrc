@@ -1,9 +1,6 @@
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+		source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
-
-source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-# fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
 
 source ~/bin/funcs.zsh
 
@@ -72,13 +69,13 @@ alias -g NF="*(.om[1])"
 
 # save path on cd
 function cd {
-    builtin cd $@
-    pwd >! /tmp/last_dir
+		builtin cd $@
+		pwd >! /tmp/last_dir
 }
 
 # restore last saved path
 if [ -f /tmp/last_dir ]; then 
-  cd `cat /tmp/last_dir`
+		cd `cat /tmp/last_dir`
 fi
 
 # batch moving rocks
@@ -107,18 +104,23 @@ autoload -U zmv
 
 # load fzf
 if [ -e /usr/share/fzf/key-bindings.zsh ]; then
-  source /usr/share/fzf/completion.zsh
-  source /usr/share/fzf/key-bindings.zsh
+		source /usr/share/fzf/completion.zsh
+		source /usr/share/fzf/key-bindings.zsh
 fi
 if [ -e /etc/profile.d/fzf-extras.zsh ]; then
-  source /etc/profile.d/fzf-extras.zsh
+		source /etc/profile.d/fzf-extras.zsh
 fi
+
+if [ -e "$HOME/.homesick/repos/homeshick/homeshick.sh" ]; then
+		source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+fi
+# fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
 
 # for yarm
 if [ -e ~/bin/yarm.zsh ]; then
-  source ~/bin/yarm.zsh
+		source ~/bin/yarm.zsh
 fi
 
 if which ruby >/dev/null && which gem >/dev/null; then
-    PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+		PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 fi

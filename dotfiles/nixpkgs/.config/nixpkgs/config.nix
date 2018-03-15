@@ -1,6 +1,10 @@
 {
   packageOverrides = pkgs: with pkgs; {
 
+    polybar = pkgs.polybar.override {
+      githubSupport = true;
+    };
+
     usrPkgs = pkgs.buildEnv {
       name = "usr-pkgs";
       pathsToLink = [ "/share" "/bin" ];

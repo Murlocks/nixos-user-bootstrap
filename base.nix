@@ -186,11 +186,13 @@ in {
   fonts = {
     enableGhostscriptFonts = true;
     fonts = with pkgs; [
+      dina-font
+      font-awesome-ttf
+      gohufont
+      siji
       terminus_font
       unifont
       unifont_upper
-      gohufont
-      font-awesome-ttf
     ];
   };
 
