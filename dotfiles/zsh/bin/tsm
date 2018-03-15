@@ -1,0 +1,61 @@
+#!/bin/bash
+# This script attaches the terminal to a common session, where all
+# terminals can show any window of the main tmux session independently
+# This script also cleans up "old" sessions
+# Todo: Cosmetic fix-ups. Make less verbose.
+
+DEBUG="y"
+showRun(){ echo Will run: $@;test -z $DEBUG||read -n1 -p"Press ENTER";$@; }
+
+SNAME=${1:-0}
+
+if ! tmux has -t $SNAME; then
+    echo -n "Session $SNAME not found, creating it: "
+    showRun exec tmux new-session -s $SNAME;
+else
+    echo -n "Session $SNAME found: "
+    MySESSION=$(tmux ls | grep -E "^$SNAME:.*\(attached\)$")
+    echo $MySESSION;
+    if [ -z "$MySESSION" ] ; then
+        echo "Session $SNAME unattached, seizing it:"
+        showRun exec tmux attach -t $SNAME \; new-window
+    else
+        echo "Session $SNAME already attached, finding grouped Sessions:"
+        REGEX="group ([^)]*)"
+        [[ $MySESSION =~ $REGEX ]]
+        GNAME=${BASH_REMATCH[1]}
+        GSESSIONS=$(tmux ls | grep "group $GNAME)" | grep -v $SNAME:)
+        echo "$GSESSIONS"
+        if [ -z "$GSESSIONS" ]; then
+            echo "No sessions in group with $SNAME found, creating new one:"
+            showRun exec tmux new-session -t $SNAME \; new-window
+        else
+            FGSESSIONS=$(echo "$GSESSIONS" | grep -v attached )
+            if [ -z "$FGSESSIONS" ]; then
+                echo "No free sessions in group $GNAME found, creating new one:"
+                showRun exec tmux new-session -t $SNAME \; new-window
+            else
+                echo -e "Free grouped Sessions:\n $FGSESSIONS";
+                if echo "$FGSESSIONS" | tail -n +2 | grep . > /dev/null; then
+                    echo "Several detached Sessions found, cleaning up:"
+                    echo "$FGSESSIONS" | while read SID x ; do
+                        if [ -z $KEEPSID ]; then
+                            KEEPSID=${SID%:*};
+                            echo "Keeping session $KEEPSID for takeover after cleanup"
+                        else
+                            echo "Cleaning up old detached session $SID"
+                            tmux kill-session -t ${SID%:}
+                        fi;
+                    done
+                    KEEPSID=$(tmux ls|grep "group $GNAME)" | grep -v attached);
+                    KEEPSID=${KEEPSID%: *}
+                    echo "Attaching to session $KEEPSID:"
+                    showRun exec tmux attach -t $KEEPSID \; new-window
+                else
+                    echo "Free session ( ${FGSESSIONS%: *} ) found, seizing it:"
+                    showRun exec tmux attach -t ${FGSESSIONS%: *} \; new-window
+                fi ;
+            fi ;
+        fi ;
+    fi ;
+fi

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+CONFIG=${XDG_CONFIG_HOME:-$HOME/.config}/dmenu/dmenurc
+
+if [ -f $CONFIG ]; then
+   . $CONFIG
+else
+   DMENU="dmenu -i"
+fi
+
+xsels=${HOME}/clipbored/clips
+sortercmd=/usr/local/bin/sorter
+
+$sortercmd $xsels $(tac $xsels | $DMENU -l 15 -p "Clipboard") | xclip -selection 'primary' -i -l 0 | xclip -o

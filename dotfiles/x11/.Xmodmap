@@ -1,0 +1,35 @@
+!
+! Swap Caps_Lock and Control_L
+!
+remove Lock = Caps_Lock
+remove Control = Control_L
+keysym Control_L = Caps_Lock
+keysym Caps_Lock = Control_L
+add Lock = Caps_Lock
+add Control = Control_L
+
+! for emacs
+! 7151  xmodmap -e "keysym Super_L = Meta_L"
+! 7161  xmodmap -e "keycode 102 = Super_L"
+
+! keycode 115 = Super_L
+! keycode 116 = Super_R
+! ! Super_L is already mod4 on my system, but Super_R is not
+! add mod4 = Super_R
+
+keycode 132 = grave asciitilde
+
+keycode 97 = BackSpace
+
+keycode 100 = space
+! keycode 100 = Shift_L
+! keycode 100 = Return
+
+! keycode 101 = Escape
+keycode 101 = Shift_L
+
+keycode 102 = Alt_L
+! keycode 102 = Escape
+
+! keycode 22 = backslash
+! keycode 51 = BackSpace

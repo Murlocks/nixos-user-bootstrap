@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }:
 
-{
+let
+
+  bg = pkgs.copyPathToStore ./images/bg.png
+
+in {
   imports = [
     ./modules
   ];
@@ -54,8 +58,11 @@
       layout = lib.mkDefault "us";
       xkbOptions = "caps:hyper,numpad:microsoft";
 
-      displayManager.lightdm.enable = true;
       windowManager.bspwm.enable = true;
+      displayManager.lightdm = {
+        enable = true;
+        background = bg;
+      };
     };
 
     openssh = {
@@ -126,6 +133,7 @@
     openssl
     p7zip
     pciutils
+    perl
     pv
     rxvt_unicode
     smartmontools

@@ -1,0 +1,1 @@
+emacsclient -nw -c --alternate-editor vim

@@ -1,0 +1,114 @@
+URxvt.geometry: 80x22
+
+! URXVT FONTS
+!------------------------------------------------
+! URxvt.font:                xft:gohufont:pixelsize=14,xft:DejaVu Sans Mono for Powerline
+URxvt.font:                -*-gohufont-medium-*-*-*-*100-*-*-*-*-iso10646-*,xft:xos4 Terminess Powerline,xft:Ubuntu Mono
+URxvt.boldFont:                -*-gohufont-medium-*-*-*-*100-*-*-*-*-iso10646-*,xft:xos4 Terminess Powerline,xft:Ubuntu Mono
+!URxvt.boldFont:            xft:Ubuntu mono:pixelsize=17:style=Bold
+! URxvt.font:                xft:xos4 Terminess Powerline
+! URxvt.boldFont:            xft:xos4 Terminess Powerline
+!URxvt.boldFont:            xft:Ubuntu mono:pixelsize=17:style=Bold
+rofi.font:                     gohufont 10
+URxvt*termname: urxvt256-color
+! URxvt.letterSpace: true
+! URxvt*letterSpace: -2
+URxvt*allow_bold: false
+! URXVT FONT SETTINGS
+!------------------------------------------------
+! Xft.autohint: true
+! Xft.antialias: true
+! Xft.hinting: true
+! Xft.hintstyle: hintslight
+! Xft.rgba: rgb
+! Xft.lcdfilter: lcddefault
+! URXVT ENABLE LINK SUPPORT
+!------------------------------------------------
+URxvt.perl-ext-common: default,matcher,clipboard,url-select
+!tabbed
+URxvt.matcher.button: 1
+URxvt.perl-ext: default
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: /usr/bin/firefox
+URxvt.url-select.underline: true
+!disable the fucking bell
+URxvt.insecure: false
+! URXVT COPY PASTE SHORTCUTS
+!------------------------------------------------
+URxvt.iso14755: False
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.keysym.Mod4-c: perl:clipboard:copy
+URxvt.keysym.Mod4-v: perl:clipboard:paste
+! URXVT SCROLLBAR AND CURSOR STYLE
+!------------------------------------------------
+URxvt*saveLines: 300000
+URxvt.scrollBar: false
+!URxvt*scrollstyle: plain
+URxvt*cursorBlink: true
+URxvt*cursorUnderline: true
+
+URxvt.internalBorder: 15
+
+rofi.kb-row-up: Control+k,Up
+rofi.kb-row-down: Control+j,Down
+
+Xcursor.size: 16
+
+! URXVT COLORS
+!------------------------------------------------
+! vim: set filetype=xdefaults :
+
+! special
+*.background: #262626
+*.foreground:   #b2b2b2
+*.cursorColor:  #b2b2b2
+
+! black
+*.color0:       #5a5a5a
+*.color8:       #8c8c8c
+
+! red
+*.color1:	#de8990
+*.color9:	#d0a8ab
+
+! green
+*.color2:	#94daa9
+*.color10:	#bae8d2
+
+! yellow
+*.color3:	#dee7aa
+*.color11:	#d7c96b
+
+! blue
+*.color4:	#6cb4dd
+*.color12:	#9cdbdf
+
+! magenta
+*.color5:	#cca8c9
+*.color13:	#db79bf
+
+! cyan
+*.color6:	#9ad4c8
+*.color14:	#59b0b2
+
+! white
+*.color7:	#e1e1e1
+*.color15:	#f0f0f0
+
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! ------------------------------------------------------------------------------
+
+! Use extended color scheme
+rofi.color-enabled:                  true
+! Color scheme for normal row
+rofi.color-normal:                   argb:00000000, #b2b2b2, argb:11FFFFFF, #b2b2b2,#262626
+! Color scheme for urgent row
+rofi.color-urgent:                   argb:00000000, #f99, argb:11FFFFFF, #f99,#262626
+! Color scheme for active row
+rofi.color-active:                   argb:00000000, #afd787, argb:11FFFFFF, #afd787,#262626
+! Color scheme window
+rofi.color-window:                   argb:ee333333, #b2b2b2,#b2b2b2
+! Separator style (none, dash, solid)
+rofi.separator-style:                solid

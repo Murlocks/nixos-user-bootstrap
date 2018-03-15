@@ -1,0 +1,17 @@
+#!/bin/bash
+
+CONFIG=${XDG_CONFIG_HOME:-$HOME/.config}/dmenu/dmenurc
+
+if [ -f $CONFIG ]; then
+   . $CONFIG
+else
+   DMENU="dmenu -i"
+fi
+
+while inp=$(echo -e "$oup" | $DMENU -p Calculate:)
+do
+    if oup2=$(calc -pd "$inp"); then
+        echo -n "$oup2" | xsel -i
+        oup="$oup2\n$oup"
+    fi
+done
