@@ -134,6 +134,7 @@ in {
     p7zip
     pciutils
     perl
+    polybar
     pv
     rxvt_unicode
     smartmontools
