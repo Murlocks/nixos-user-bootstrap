@@ -2,7 +2,7 @@
 
 let
 
-  bg = pkgs.copyPathToStore ./images/bg.png
+  bg = pkgs.copyPathToStore ./images/bg.png;
 
 in {
   imports = [
@@ -176,7 +176,7 @@ in {
         uid = 1337;
         description = "Rene Tianco";
         extraGroups = [ "wheel" ];
-        dotfiles.profiles = [ "bspwm" "nixpkgs" ];
+        dotfiles.profiles = [ "bspwm" "x11" "zsh" "nixpkgs" ];
       };
 
     };
