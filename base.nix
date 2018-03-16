@@ -167,12 +167,12 @@ in {
     users = {
 
       root = {
-        initialPassword = "password1";
+        passwordFile = "/etc/nixos/root.passwd";
         dotfiles.profiles = [ "bspwm" ];
       };
 
       murlocks = {
-        initialPassword = "password1";
+        passwordFile = "/etc/nixos/murlocks.passwd";
         isNormalUser = true;
         uid = 1337;
         description = "Rene Tianco";
