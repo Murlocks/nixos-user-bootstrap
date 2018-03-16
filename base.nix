@@ -91,6 +91,7 @@ in {
       enableCompletion = true;
     };
     bash.enableCompletion = true;
+    ssh.askPassword = ""; # turn off ugly GUI box
   };
 
   environment.variables.PATH = [ "$HOME/.bin" ];
