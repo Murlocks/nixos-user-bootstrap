@@ -97,13 +97,12 @@ in {
   environment.variables.PATH = [ "$HOME/.bin" ];
 
   environment.systemPackages = with pkgs; [
-    # nixos-unstable.arping
-    # nixos-unstable.preventGC
     bc
     bindfs
     calc
     daemonize
     ddrescue
+    dina-font
     dos2unix
     easyrsa
     entr
@@ -129,6 +128,8 @@ in {
     mtr
     ncdu
     netcat-openbsd
+    # nixos-unstable.arping
+    # nixos-unstable.preventGC
     nix-repl
     nmap
     openssl
@@ -138,6 +139,7 @@ in {
     polybar
     pv
     rxvt_unicode
+    siji
     smartmontools
     socat
     sqlite-interactive
