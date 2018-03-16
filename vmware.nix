@@ -15,5 +15,10 @@
 
   security.rngd.enable = false;
 
-  services.vmwareGuest.enable = true;
+  services = {
+	vmwareGuest.enable = true;
+	xserver.resolutions = [ {x = 1920; y = 1200;} {x = 1920; y = 1080;} ];
+	xserver.videoDrivers = [ "vmware" ];
+};
+
 }
