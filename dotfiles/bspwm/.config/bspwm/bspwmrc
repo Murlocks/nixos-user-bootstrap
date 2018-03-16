@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # [[ -f ~/.config/bspwm/!window_gap ]] && window_gap=$(desktop_margin) || \
 #     window_gap=40 # default
