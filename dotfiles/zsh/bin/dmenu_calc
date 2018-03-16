@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 CONFIG=${XDG_CONFIG_HOME:-$HOME/.config}/dmenu/dmenurc
 

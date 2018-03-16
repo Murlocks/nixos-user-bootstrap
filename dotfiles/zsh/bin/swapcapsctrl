@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 xmodmap -e "remove Lock = Caps_Lock"
 xmodmap -e "remove Control = Control_L"

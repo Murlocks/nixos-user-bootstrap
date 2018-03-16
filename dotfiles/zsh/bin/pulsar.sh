@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 FREQ=${FREQ:-0.07}
 

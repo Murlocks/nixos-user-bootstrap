@@ -1,9 +1,9 @@
-#! /bin/sh
+#!/usr/bin/env bash
 
 g++ $1.cc -o $1 -O2 -Wall -Wextra -std=c++11 || exit
 
 for i in $1.in${2-*}; do
     echo "###_$1_###"
-    /usr/bin/time -f "%U_s,_%M_kb" ./$1 < $i > ${i/in/out}
+    time -f "%U_s,_%M_kb" ./$1 < $i > ${i/in/out}
     diff -q ${i/in/ok} ${i/in/out} || colordiff -y ${i/in/ok} ${i/in/out}
 done

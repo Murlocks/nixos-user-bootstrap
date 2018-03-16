@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This script attaches the terminal to a common session, where all
 # terminals can show any window of the main tmux session independently
 # This script also cleans up "old" sessions

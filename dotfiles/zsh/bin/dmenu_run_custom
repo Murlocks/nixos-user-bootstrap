@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Originally based on code by Dieter Plaetinck.
 # Pretty much re-written by Mina Nagy (mnzaki)

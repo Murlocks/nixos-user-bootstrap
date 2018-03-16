@@ -9,7 +9,7 @@ function __rm(){
 function __rm_single_file(){
   if ! [ -d ~/.Trash/ ]
   then
-    command /bin/mkdir ~/.Trash
+    mkdir ~/.Trash
   fi
 
   if ! [ $# -eq 1 ]
@@ -29,7 +29,7 @@ function __rm_single_file(){
       NAME="$BASENAME.$COUNT"
     done
 
-    command /bin/mv $1 ~/.Trash/$NAME
+    mv $1 ~/.Trash/$NAME
   else
     echo "No such file or directory: $file"
   fi
