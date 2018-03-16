@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [ "$#" -ne 1 ]; then
+  echo "usage: ./test <config file>"
+  exit 1
+fi
+
+rm -rf /etc/nixos
+nixos-generate-config
+sed -i '/^\s*imports\s*=/{n;/^\s*\[/{p;s//\t\.\/'"$1"'/}}' /etc/nixos/configuration.nix
+cp -af ./* /etc/nixos
+nixos-rebuild switch
